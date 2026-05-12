@@ -1,6 +1,15 @@
 import { LEGAL_SUPPORT_EMAIL } from '../legal/copy';
 import { showTransientToast } from './transientToast';
 
+export async function copySupportEmailAndToast(): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(LEGAL_SUPPORT_EMAIL);
+    showTransientToast('Email copied');
+  } catch {
+    showTransientToast('Could not copy email');
+  }
+}
+
 /**
  * Event delegation: footer "Contact us" uses `a[data-copy-support-email]`.
  */
@@ -11,7 +20,7 @@ export class SupportEmailCopyController {
     const anchor = target.closest<HTMLAnchorElement>('a[data-copy-support-email]');
     if (!anchor) return;
     event.preventDefault();
-    void this.copy();
+    void copySupportEmailAndToast();
   };
 
   public start(): void {
@@ -20,14 +29,5 @@ export class SupportEmailCopyController {
 
   public stop(): void {
     document.body.removeEventListener('click', this.onClick);
-  }
-
-  private async copy(): Promise<void> {
-    try {
-      await navigator.clipboard.writeText(LEGAL_SUPPORT_EMAIL);
-      showTransientToast('Email copied');
-    } catch {
-      showTransientToast('Could not copy email');
-    }
   }
 }

@@ -43,7 +43,7 @@ export const siteConfig: SiteConfig = {
   navItems: [
     { id: 'home', label: 'Home', href: 'index.html#top' },
     { id: 'features', label: 'Features', href: 'index.html#features' },
-    { id: 'use-cases', label: 'Use Cases', href: 'index.html#use-cases' },
+    { id: 'use-cases', label: 'Use Cases', href: 'index.html#why-choose-luminy' },
     { id: 'pricing', label: 'Pricing', href: 'pricing.html' },
     { id: 'support', label: 'Support', href: 'index.html#footer' },
   ],
@@ -66,8 +66,8 @@ export const siteConfig: SiteConfig = {
       heading: 'About',
       links: [
         { label: 'About us', href: '#' },
-        { label: 'Blog', href: '#' },
-        { label: 'Suggestions', href: 'suggestions.html' },
+        { label: 'Blog', href: 'blog.html' },
+        { label: 'Suggestions', href: '#', copySupportEmail: true },
       ],
     },
     {

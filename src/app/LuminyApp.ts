@@ -39,29 +39,7 @@ export class LuminyApp extends Mountable {
     const features = new FeaturesSection();
     const valueProps = new ValuePropsSection();
 
-    const highlights = new HighlightsSection(
-      [
-        {
-          step: '1',
-          title: 'Frame the moment',
-          description: 'Anchor each initiative with a short, living narrative your team can return to.',
-        },
-        {
-          step: '2',
-          title: 'Shape in the open',
-          description: 'Keep exploration visible so the best ideas surface before they harden into assumptions.',
-        },
-        {
-          step: '3',
-          title: 'Finish with warmth',
-          description: 'Close the loop with customers using language that matches the care in the build.',
-        },
-      ],
-      {
-        quote: '“We finally have a home for the work that used to live in ten different places.”',
-        attribution: 'Jordan M., Head of Product Design',
-      },
-    );
+    const highlights = new HighlightsSection();
 
     const footer = new Footer(this.config);
 

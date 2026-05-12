@@ -45,7 +45,7 @@ const FAQ_ITEMS: readonly FaqItem[] = [
   {
     question: 'How do I get help or share feedback?',
     answer: [
-      'Use Contact us in the footer to copy our support email. You can also open the Suggestions page to start an email draft to our team.',
+      'Use Contact us or Suggestions in the footer to copy our support email and paste it into your mail app.',
       'We read every message. We try to reply when we can, but we may not respond to every inquiry right away.',
     ],
   },

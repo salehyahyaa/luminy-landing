@@ -1,7 +1,7 @@
 import { Component } from '../core/Component';
 
 /**
- * Bridge between “What does Luminy include?” and Highlights on the home page.
+ * Bridge between “What does Luminy include?” and Why choose Luminy on the home page.
  */
 export class ValuePropsSection extends Component {
   public constructor() {

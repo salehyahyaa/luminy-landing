@@ -14,6 +14,8 @@ export default defineConfig({
         suggestions: './suggestions.html',
         pricing: './pricing.html',
         faq: './faq.html',
+        blog: './blog.html',
+        blogReleasingSoon: './blog-releasing-soon.html',
       },
     },
   },

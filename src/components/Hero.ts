@@ -63,6 +63,7 @@ export class Hero extends Component {
     copy.appendChild(actions);
 
     const mockHost = this.createElement('div', 'hero__mock-host');
+    mockHost.id = 'hero-mock';
     mockHost.setAttribute('aria-hidden', 'true');
     mockHost.innerHTML = Hero.MOCK_HTML;
 

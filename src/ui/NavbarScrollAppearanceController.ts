@@ -1,34 +1,41 @@
 /**
- * Toggles `nav--scrolled` on the site header so the bar can show a hairline
- * border only after the page is scrolled (Apple-style).
+ * Toggles `nav--scrolled` so the navbar shows a hairline + blur only after the user
+ * has scrolled far enough that the Features block (“What does Luminy include?”) enters
+ * the viewport — past the full hero. Pages without `#features` fall back to a small scroll offset.
  */
 export class NavbarScrollAppearanceController {
   private readonly header: HTMLElement;
 
   private readonly scrolledClass = 'nav--scrolled';
 
-  private readonly thresholdPx: number;
+  private readonly sentinelSelector: string;
 
   private scheduledFrame = 0;
 
-  public constructor(selector = 'header.nav', thresholdPx = 8) {
-    const el = document.querySelector(selector);
+  public constructor(
+    headerSelector = 'header.nav',
+    /** Includes section — see `FeaturesSection` (`id="features"`). */
+    sentinelSelector = '#features',
+  ) {
+    const el = document.querySelector(headerSelector);
     if (!el) {
-      throw new Error(`Navbar not found: ${selector}`);
+      throw new Error(`Navbar not found: ${headerSelector}`);
     }
     this.header = el as HTMLElement;
-    this.thresholdPx = thresholdPx;
+    this.sentinelSelector = sentinelSelector;
   }
 
   public start(): void {
     this.sync();
     requestAnimationFrame(() => this.sync());
     window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
     window.addEventListener('pageshow', this.onPageshow);
   }
 
   public stop(): void {
     window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
     window.removeEventListener('pageshow', this.onPageshow);
     if (this.scheduledFrame !== 0) {
       cancelAnimationFrame(this.scheduledFrame);
@@ -51,7 +58,20 @@ export class NavbarScrollAppearanceController {
   };
 
   private sync(): void {
-    const scrolled = window.scrollY > this.thresholdPx;
-    this.header.classList.toggle(this.scrolledClass, scrolled);
+    const sentinel = document.querySelector<HTMLElement>(this.sentinelSelector);
+    if (!sentinel) {
+      this.header.classList.toggle(this.scrolledClass, window.scrollY > 8);
+      return;
+    }
+
+    const rect = sentinel.getBoundingClientRect();
+    const vh = window.innerHeight;
+    /**
+     * No bottom treatment until the top of #features rises into view (e.g. headline
+     * peeking above the bottom of the window), matching the hero → includes transition.
+     */
+    const featuresEnteringViewport = rect.top < vh * 0.92;
+
+    this.header.classList.toggle(this.scrolledClass, featuresEnteringViewport);
   }
 }
