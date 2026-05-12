@@ -1,5 +1,5 @@
 import './styles/main.css';
-import { LuminyApp } from './app/LuminyApp';
+import { PricingPageApp } from './app/PricingPageApp';
 import { siteConfig } from './config/site.config';
 import { startMarketingChrome } from './ui/startMarketingChrome';
 
@@ -9,7 +9,7 @@ if (!mountPoint) {
   throw new Error('Missing #app mount point');
 }
 
-const app = new LuminyApp(siteConfig);
+const app = new PricingPageApp(siteConfig);
 app.mount(mountPoint);
 
 startMarketingChrome();

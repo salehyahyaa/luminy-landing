@@ -11,15 +11,24 @@ export interface SiteNavAuth {
   readonly signup: SiteNavItem;
 }
 
+export interface SiteFooterLink {
+  readonly label: string;
+  readonly href: string;
+  /** Copies support email + shows toast instead of navigating. */
+  readonly copySupportEmail?: boolean;
+}
+
 export interface SiteFooterColumn {
   readonly heading: string;
-  readonly links: readonly { readonly label: string; readonly href: string }[];
+  readonly links: readonly SiteFooterLink[];
 }
 
 export interface SiteConfig {
   readonly brandName: string;
   readonly logoSrc: string;
   readonly logoAlt: string;
+  /** Top of landing — use `index.html#top` so nav/footer work from multi-page routes like `privacy.html`. */
+  readonly homeHref: string;
   readonly navItems: readonly SiteNavItem[];
   readonly navAuth: SiteNavAuth;
   readonly footerColumns: readonly SiteFooterColumn[];
@@ -30,12 +39,13 @@ export const siteConfig: SiteConfig = {
   brandName: 'Luminy',
   logoSrc: logoUrl,
   logoAlt: 'Luminy logo',
+  homeHref: 'index.html#top',
   navItems: [
-    { id: 'home', label: 'Home', href: '#top' },
-    { id: 'features', label: 'Features', href: '#features' },
-    { id: 'use-cases', label: 'Use Cases', href: '#use-cases' },
-    { id: 'pricing', label: 'Pricing', href: '#pricing' },
-    { id: 'support', label: 'Support', href: '#footer' },
+    { id: 'home', label: 'Home', href: 'index.html#top' },
+    { id: 'features', label: 'Features', href: 'index.html#features' },
+    { id: 'use-cases', label: 'Use Cases', href: 'index.html#use-cases' },
+    { id: 'pricing', label: 'Pricing', href: 'pricing.html' },
+    { id: 'support', label: 'Support', href: 'index.html#footer' },
   ],
   navAuth: {
     login: { id: 'login', label: 'Login', href: '#' },
@@ -45,8 +55,8 @@ export const siteConfig: SiteConfig = {
     {
       heading: 'Product',
       links: [
-        { label: 'Pricing', href: '#pricing' },
-        { label: 'Features', href: '#features' },
+        { label: 'Pricing', href: 'pricing.html' },
+        { label: 'Features', href: 'index.html#features' },
         { label: 'Demo', href: '#' },
         { label: 'Download for iOS', href: '#' },
         { label: 'Download for Mac', href: '#' },
@@ -57,16 +67,16 @@ export const siteConfig: SiteConfig = {
       links: [
         { label: 'About us', href: '#' },
         { label: 'Blog', href: '#' },
-        { label: 'Suggestions', href: '#' },
+        { label: 'Suggestions', href: 'suggestions.html' },
       ],
     },
     {
       heading: 'Legal',
       links: [
-        { label: 'Privacy Policy', href: '#' },
-        { label: 'Terms of use', href: '#' },
-        { label: 'Cookie Policy', href: '#' },
-        { label: 'Data policy', href: '#' },
+        { label: 'Privacy Policy', href: 'privacy.html' },
+        { label: 'Terms of use', href: 'terms.html' },
+        { label: 'Cookie Policy', href: 'cookie-policy.html' },
+        { label: 'Data policy', href: 'data-policy.html' },
       ],
     },
     {
@@ -74,8 +84,8 @@ export const siteConfig: SiteConfig = {
       links: [
         { label: 'Help Center', href: '#' },
         { label: 'Documentation', href: '#' },
-        { label: 'FAQ', href: '#' },
-        { label: 'Contact us', href: '#' },
+        { label: 'FAQ', href: 'faq.html' },
+        { label: 'Contact us', href: '#', copySupportEmail: true },
       ],
     },
   ],

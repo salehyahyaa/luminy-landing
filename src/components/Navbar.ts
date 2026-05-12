@@ -13,7 +13,7 @@ export class Navbar extends Component {
     const inner = this.createElement('div', 'nav__inner');
 
     const brand = this.createElement('a', 'nav__brand');
-    brand.href = '#top';
+    brand.href = this.config.homeHref;
     brand.setAttribute('aria-label', `${this.config.brandName} home`);
 
     const logo = document.createElement('img');

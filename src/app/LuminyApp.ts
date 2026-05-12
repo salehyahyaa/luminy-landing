@@ -2,7 +2,7 @@ import type { SiteConfig } from '../config/site.config';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
 import { FeaturesSection } from '../components/FeaturesSection';
-import { PricingSection } from '../components/PricingSection';
+import { ValuePropsSection } from '../components/ValuePropsSection';
 import { HighlightsSection } from '../components/HighlightsSection';
 import { Footer } from '../components/Footer';
 import { Mountable } from '../core/Mountable';
@@ -37,8 +37,7 @@ export class LuminyApp extends Mountable {
 
     const hero = new Hero();
     const features = new FeaturesSection();
-
-    const pricing = new PricingSection();
+    const valueProps = new ValuePropsSection();
 
     const highlights = new HighlightsSection(
       [
@@ -68,7 +67,7 @@ export class LuminyApp extends Mountable {
 
     hero.mount(main);
     features.mount(main);
-    pricing.mount(main);
+    valueProps.mount(main);
     highlights.mount(main);
 
     this._element.appendChild(skip);

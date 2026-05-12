@@ -16,7 +16,7 @@ export class Footer extends Component {
 
     const logoCell = this.createElement('div', 'footer__mark');
     const home = this.createElement('a', 'footer__logo-link');
-    home.href = '#top';
+    home.href = this.config.homeHref;
     home.setAttribute('aria-label', `${this.config.brandName} — home`);
 
     const logo = document.createElement('img');
@@ -38,7 +38,14 @@ export class Footer extends Component {
       for (const link of column.links) {
         const li = document.createElement('li');
         const a = this.createElement('a', 'footer__link', link.label);
-        a.href = link.href;
+        if (link.copySupportEmail) {
+          a.href = '#';
+          a.setAttribute('data-copy-support-email', '');
+          a.setAttribute('role', 'button');
+          a.setAttribute('aria-label', 'Copy support email to clipboard');
+        } else {
+          a.href = link.href;
+        }
         li.appendChild(a);
         list.appendChild(li);
       }

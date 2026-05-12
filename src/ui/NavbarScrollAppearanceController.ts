@@ -22,16 +22,23 @@ export class NavbarScrollAppearanceController {
 
   public start(): void {
     this.sync();
+    requestAnimationFrame(() => this.sync());
     window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('pageshow', this.onPageshow);
   }
 
   public stop(): void {
     window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('pageshow', this.onPageshow);
     if (this.scheduledFrame !== 0) {
       cancelAnimationFrame(this.scheduledFrame);
       this.scheduledFrame = 0;
     }
   }
+
+  private readonly onPageshow = (): void => {
+    this.sync();
+  };
 
   private readonly onScroll = (): void => {
     if (this.scheduledFrame !== 0) {
