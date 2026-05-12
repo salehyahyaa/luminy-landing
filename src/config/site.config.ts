@@ -4,6 +4,8 @@ export interface SiteNavItem {
   readonly id: string;
   readonly label: string;
   readonly href: string;
+  /** Copies support email + shows toast instead of navigating. */
+  readonly copySupportEmail?: boolean;
 }
 
 export interface SiteNavAuth {
@@ -45,7 +47,7 @@ export const siteConfig: SiteConfig = {
     { id: 'features', label: 'Features', href: 'index.html#features' },
     { id: 'use-cases', label: 'Use Cases', href: 'index.html#why-choose-luminy' },
     { id: 'pricing', label: 'Pricing', href: 'pricing.html' },
-    { id: 'support', label: 'Support', href: 'index.html#footer' },
+    { id: 'support', label: 'Support', href: '#', copySupportEmail: true },
   ],
   navAuth: {
     login: { id: 'login', label: 'Login', href: '#' },

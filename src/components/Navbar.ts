@@ -34,7 +34,14 @@ export class Navbar extends Component {
     for (const item of this.config.navItems) {
       const li = document.createElement('li');
       const a = this.createElement('a', 'nav__link', item.label);
-      a.href = item.href;
+      if (item.copySupportEmail) {
+        a.href = '#';
+        a.setAttribute('data-copy-support-email', '');
+        a.setAttribute('role', 'button');
+        a.setAttribute('aria-label', 'Copy support email to clipboard');
+      } else {
+        a.href = item.href;
+      }
       li.appendChild(a);
       list.appendChild(li);
     }

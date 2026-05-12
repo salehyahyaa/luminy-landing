@@ -6,7 +6,13 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  /* Base wash shifts gently with scroll; extra stop for smoother vertical blend */
   background:
+    radial-gradient(
+      ellipse 125% 90% at 50% calc(25% + var(--scroll-pct) * 50%),
+      rgba(186, 220, 255, 0.22) 0%,
+      transparent 60%
+    ),
     radial-gradient(
       ellipse 140% 95% at 50% calc(12% + var(--scroll-pct) * 72%),
       rgba(186, 220, 255, 0.5) 0%,
@@ -30,10 +36,11 @@
     linear-gradient(
       180deg,
       #fbfbfd 0%,
-      #f6f7f9 24%,
-      #faf9fc 48%,
-      #f3f6fb 72%,
-      #f8f7f4 100%
+      #f6f7f9 20%,
+      #faf9fc 44%,
+      #f4f5fb 64%,
+      #f8f7f4 88%,
+      #f6f5f8 100%
     );
 }
 
@@ -325,6 +332,11 @@
   pointer-events: none;
   background:
     radial-gradient(
+      ellipse 110% 88% at 48% calc(65% + var(--scroll-pct) * 22%),
+      rgba(225, 218, 255, 0.14) 0%,
+      transparent 56%
+    ),
+    radial-gradient(
       ellipse 140% 95% at 50% calc(12% + var(--scroll-pct) * 72%),
       rgba(186, 220, 255, 0.5) 0%,
       transparent 58%
@@ -347,9 +359,9 @@
     linear-gradient(
       180deg,
       #fbfbfd 0%,
-      #f6f7f9 24%,
-      #faf9fc 48%,
-      #f3f6fb 72%,
+      #f6f7f9 22%,
+      #faf9fc 46%,
+      #f5f4fa 68%,
       #f8f7f4 100%
     );
 }
@@ -863,7 +875,7 @@
   color: var(--color-text-muted);
 }
 
-/* Features — full viewport height; fade-in background avoids a hard “cut” line against the hero wash */
+/* Features — full viewport; layered washes hand off to value-props; scroll-linked radials drift smoothly */
 .features {
   position: relative;
   box-sizing: border-box;
@@ -872,14 +884,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.28) 22%,
-    rgba(255, 255, 255, 0.42) 52%
-  );
+  background:
+    radial-gradient(
+      ellipse 120% 92% at 42% calc(28% + var(--scroll-pct) * 24%),
+      rgba(186, 220, 255, 0.2) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 100% 72% at 82% calc(68% - var(--scroll-pct) * 18%),
+      rgba(225, 218, 255, 0.15) 0%,
+      transparent 54%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.14) 16%,
+      rgba(244, 246, 252, 0.4) 42%,
+      rgba(242, 246, 255, 0.52) 70%,
+      rgba(246, 243, 252, 0.5) 100%
+    );
   border-top: none;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.042);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -1598,7 +1623,7 @@
   outline-offset: 3px;
 }
 
-/* Value props — between Includes and Highlights; full-viewport band like Features */
+/* Value props — continues hue from features; soft green/lilac drift with scroll */
 .value-props {
   position: relative;
   box-sizing: border-box;
@@ -1607,13 +1632,25 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(248, 249, 252, 0.45) 45%,
-    rgba(255, 255, 255, 0.28) 100%
-  );
-  border-bottom: 1px solid var(--color-border);
+  background:
+    radial-gradient(
+      ellipse 115% 88% at 52% calc(32% - var(--scroll-pct) * 20%),
+      rgba(198, 236, 215, 0.14) 0%,
+      transparent 56%
+    ),
+    radial-gradient(
+      ellipse 92% 78% at 18% calc(58% + var(--scroll-pct) * 14%),
+      rgba(225, 218, 255, 0.17) 0%,
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(246, 243, 252, 0.52) 0%,
+      rgba(248, 250, 255, 0.5) 30%,
+      rgba(250, 252, 249, 0.54) 58%,
+      rgba(252, 249, 246, 0.48) 100%
+    );
+  border-bottom: 1px solid rgba(0, 0, 0, 0.042);
   -webkit-backdrop-filter: blur(10px) saturate(150%);
   backdrop-filter: blur(10px) saturate(150%);
 }
@@ -1685,13 +1722,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(252, 252, 254, 0.55) 48%,
-    rgba(246, 247, 250, 0.35) 100%
-  );
-  border-bottom: 1px solid var(--color-border);
+  background:
+    radial-gradient(
+      ellipse 105% 84% at 48% calc(38% + var(--scroll-pct) * 24%),
+      rgba(255, 210, 225, 0.1) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 85% 68% at 78% calc(22% - var(--scroll-pct) * 12%),
+      rgba(186, 220, 255, 0.11) 0%,
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(252, 249, 246, 0.5) 0%,
+      rgba(252, 251, 254, 0.56) 42%,
+      rgba(248, 247, 244, 0.44) 100%
+    );
+  border-bottom: 1px solid rgba(0, 0, 0, 0.045);
   -webkit-backdrop-filter: blur(10px) saturate(150%);
   backdrop-filter: blur(10px) saturate(150%);
 }
